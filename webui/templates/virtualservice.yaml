@@ -30,8 +30,6 @@ kind: VirtualService
 metadata:
   name: webui-rollout-proxy
 spec:
-  gateways:
-    - webui-rollout-gateway
   hosts:
     - "webui-rollout-proxy"
   http:
