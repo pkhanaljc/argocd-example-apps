@@ -17,6 +17,9 @@ spec:
       containers:
       - name: webui-rollout
         image: dotronglong/faker:stable
+        volumeMounts:
+        - name: mocks-volume
+          mountPath: /app/mocks
         ports:
         - name: http
           containerPort: 3030
@@ -25,6 +28,10 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
+      volumes:
+      - name: mocks-volume
+        configMap:
+          name: user-mocks-configmap
   strategy:
 #    canary:
 #      # analysis will be performed in background, while rollout is progressing through its steps
@@ -83,6 +90,9 @@ spec:
       containers:
         - name: webui-experimental-rollout
           image: dotronglong/faker:stable
+          volumeMounts:
+          - name: mocks-volume
+            mountPath: /app/mocks
           ports:
             - name: http
               containerPort: 3030
@@ -91,6 +101,10 @@ spec:
             requests:
               memory: 32Mi
               cpu: 5m
+        volumes:
+        - name: mocks-volume
+          configMap:
+            name: user-mocks-configmap
   strategy:
     #    canary:
     #      # analysis will be performed in background, while rollout is progressing through its steps
