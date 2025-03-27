@@ -15,7 +15,7 @@ spec:
         app: webui-rollout
     spec:
       containers:
-      - name: istio-rollout
+      - name: webui-rollout
         image: argoproj/rollouts-demo:blue
         ports:
         - name: http
