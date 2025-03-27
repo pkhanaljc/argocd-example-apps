@@ -41,9 +41,9 @@ spec:
         host: webui-rollout
         port:
           number: 3030
-      weight: 50
+      weight: 100
     - destination:
         host: webui-experimental-rollout
         port:
           number: 3030
-      weight: 50
+      weight: 0
