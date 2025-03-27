@@ -104,7 +104,7 @@ spec:
       volumes:
       - name: mocks-volume
         configMap:
-          name: user-mocks-configmap
+          name: user-mocks-configmap-experiment
   strategy:
     #    canary:
     #      # analysis will be performed in background, while rollout is progressing through its steps

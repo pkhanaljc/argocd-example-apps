@@ -25,25 +25,25 @@ spec:
 
 ---
 
-#apiVersion: networking.istio.io/v1alpha3
-#kind: VirtualService
-#metadata:
-#  name: webui-rollout-proxy
-#spec:
-#  gateways:
-#    - webui-rollout-gateway
-#  hosts:
-#    - "*"
-#  http:
-#  - name: primary
-#    route:
-#    - destination:
-#        host: webui-rollout
-#        port:
-#          number: 3030
-#      weight: 90
-#    - destination:
-#        host: webui-experimental-rollout
-#        port:
-#          number: 3030
-#      weight: 10
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webui-rollout-proxy
+spec:
+  gateways:
+    - webui-rollout-gateway
+  hosts:
+    - "*"
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: webui-rollout
+        port:
+          number: 3030
+      weight: 90
+    - destination:
+        host: webui-experimental-rollout
+        port:
+          number: 3030
+      weight: 10

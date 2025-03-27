@@ -16,3 +16,24 @@ data:
         ]
       }
     }
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-mocks-configmap-experiment
+data:
+  users.json: |
+    {
+      "request": {
+        "method": "GET",
+        "path": "/v1/users"
+      },
+      "response": {
+        "body": [
+          { "id": 1, "name": "John experiment" },
+          { "id": 2, "name": "Marry experiment" }
+        ]
+      }
+    }
