@@ -37,5 +37,5 @@ spec:
         host: webui-rollout
       weight: 90
     - destination:
-        host: webui-rollout
+        host: webui-experimental-rollout
       weight: 10
