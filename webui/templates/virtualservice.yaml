@@ -4,27 +4,27 @@ metadata:
   name: webui-rollout
 spec:
   gateways:
-  - webui-rollout-gateway
+    - webui-rollout-gateway
   hosts:
-  - "*"
+    - "*"
   http:
-  - name: primary
-    match:
-    - uri:
-        prefix: "/v1/users"
-    route:
-    - destination:
-        host: webui-rollout
-        port:
-          number: 3030
-        subset: stable  # referenced in canary.trafficRouting.webui.destinationRule.stableSubsetName
-      weight: 100
-    - destination:
-        host: webui-rollout
-        port:
-          number: 3030
-        subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
-      weight: 0
+    - match:
+        - uri:
+            prefix: "/v1"
+      route:
+        - destination:
+            host: webui-rollout
+            port:
+              number: 3030
+            subset: stable
+          weight: 100
+        - destination:
+            host: webui-rollout
+            port:
+              number: 3030
+            subset: canary
+          weight: 0
+
 
 ---
 
