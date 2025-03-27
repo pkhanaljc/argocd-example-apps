@@ -33,7 +33,7 @@ spec:
   gateways:
     - webui-rollout-gateway
   hosts:
-    - "*"
+    - "webui-rollout-proxy"
   http:
   - name: primary
     route:
