@@ -9,6 +9,9 @@ spec:
   - "*"
   http:
   - name: primary
+    match:
+    - uri:
+        prefix: "/v1"
     route:
     - destination:
         host: webui-rollout
