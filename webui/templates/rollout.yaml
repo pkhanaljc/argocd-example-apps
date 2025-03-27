@@ -61,3 +61,69 @@ spec:
         - setWeight: 75
         - pause:
             duration: 1m
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: webui-experimental-rollout
+spec:
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: webui-experimental-rollout
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: webui-experimental-rollout
+    spec:
+      containers:
+        - name: webui-experimental-rollout
+          image: argoproj/rollouts-demo:blue
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 5m
+  strategy:
+    #    canary:
+    #      # analysis will be performed in background, while rollout is progressing through its steps
+    #      analysis:
+    #        startingStep: 1   # index of step list, of when to start this analysis
+    #        templates:
+    #        - templateName: webui-success-rate
+    #        args:             # arguments allow AnalysisTemplates to be re-used
+    #        - name: service
+    #          value: webui-rollout
+    #        - name: namespace
+    #          valueFrom:
+    #            fieldRef:
+    #              fieldPath: metadata.namespace
+    canary:
+      maxSurge: 30%
+      maxUnavailable: 0
+      trafficRouting:
+        istio:
+          virtualService:
+            name: webui-rollout
+            routes:
+              - primary
+          destinationRule:
+            name: webui-destrule    # required
+            canarySubsetName: canary  # required
+            stableSubsetName: stable  # required
+      steps:
+        - setCanaryScale:
+            matchTrafficWeight: true
+        - setWeight: 50
+        - pause:
+            duration: 1m
+        - setWeight: 75
+        - pause:
+            duration: 1m
