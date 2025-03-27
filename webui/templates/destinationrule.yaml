@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: webui-destrule
 spec:
-  host: webui-rollout
+  host: webui-rollout-proxy
   subsets:
   - name: canary   # referenced in canary.trafficRouting.istio.destinationRule.canarySubsetName
     labels:        # labels will be injected with canary rollouts-pod-template-hash value
