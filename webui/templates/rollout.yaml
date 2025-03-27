@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: istio-rollout
+  name: webui-rollout
 spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: istio-rollout
+      app: webui-rollout
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
       labels:
-        app: istio-rollout
+        app: webui-rollout
     spec:
       containers:
       - name: istio-rollout
@@ -31,10 +31,10 @@ spec:
 #      analysis:
 #        startingStep: 1   # index of step list, of when to start this analysis
 #        templates:
-#        - templateName: istio-success-rate
+#        - templateName: webui-success-rate
 #        args:             # arguments allow AnalysisTemplates to be re-used
 #        - name: service
-#          value: istio-rollout
+#          value: webui-rollout
 #        - name: namespace
 #          valueFrom:
 #            fieldRef:

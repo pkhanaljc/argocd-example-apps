@@ -1,0 +1,41 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webui-rollout-vsvc-proxy
+spec:
+  gateways:
+  - webui-rollout-gateway
+  hosts:
+  - webui-rollout.local
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: webui-rollout-proxy
+        subset: stable  # referenced in canary.trafficRouting.webui.destinationRule.stableSubsetName
+      weight: 100
+    - destination:
+        host: webui-rollout-proxy
+        subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
+      weight: 0
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webui-rollout-vsvc
+spec:
+  gateways:
+    - webui-rollout-gateway
+  hosts:
+    - webui-rollout-proxy.local
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: webui-rollout
+      weight: 90
+    - destination:
+        host: webui-rollout
+      weight: 10
