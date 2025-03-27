@@ -6,7 +6,7 @@ spec:
   gateways:
   - webui-rollout-gateway
   hosts:
-  - webui-rollout.local
+  - "*"
   http:
   - name: primary
     route:
@@ -29,7 +29,7 @@ spec:
   gateways:
     - webui-rollout-gateway
   hosts:
-    - webui-rollout-proxy.local
+    - "*"
   http:
   - name: primary
     route:
