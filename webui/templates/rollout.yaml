@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
       - name: webui-rollout
-        image: argoproj/rollouts-demo:yellow
+        image: dotronglong/faker:stable
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 3030
           protocol: TCP
         resources:
           requests:
@@ -82,10 +82,10 @@ spec:
     spec:
       containers:
         - name: webui-experimental-rollout
-          image: argoproj/rollouts-demo:blue
+          image: dotronglong/faker:stable
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 3030
               protocol: TCP
           resources:
             requests:
