@@ -101,10 +101,10 @@ spec:
             requests:
               memory: 32Mi
               cpu: 5m
-        volumes:
-        - name: mocks-volume
-          configMap:
-            name: user-mocks-configmap
+      volumes:
+      - name: mocks-volume
+        configMap:
+          name: user-mocks-configmap
   strategy:
     #    canary:
     #      # analysis will be performed in background, while rollout is progressing through its steps
