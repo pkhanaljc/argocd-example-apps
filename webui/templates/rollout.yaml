@@ -45,11 +45,11 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            name: istio-rollout-vsvc-proxy
+            name: webui-rollout-vsvc-proxy
             routes:
             - primary
           destinationRule:
-            name: rollout-destrule    # required
+            name: webui-destrule    # required
             canarySubsetName: canary  # required
             stableSubsetName: stable  # required
       steps:
