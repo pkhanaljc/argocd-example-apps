@@ -5,6 +5,8 @@ metadata:
   name: hello-proxy-svc # The intermediate target service name
   namespace: istio-chain-example
 spec:
+  selector: # <-- ADD THIS SELECTOR section
+    app: hello-proxy-app
   # No selector - this service doesn't directly route to pods
   ports:
   - name: http
