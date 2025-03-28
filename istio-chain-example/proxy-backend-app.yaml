@@ -19,7 +19,7 @@ spec:
         image: docker.io/paulbouwer/hello-kubernetes:1.7 # Using same base image
         ports:
         - containerPort: 8080
-          name: http-proxy-hello # Different port name for clarity
+          name: http # Different port name for clarity
         env:
         - name: MESSAGE
           value: "Response directly from PROXY Service" # Distinct message

@@ -9,4 +9,4 @@ spec:
   ports:
   - name: http
     port: 80 # Port targeted by the first VS
-    targetPort: http-proxy-hello
+    targetPort: http
