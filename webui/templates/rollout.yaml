@@ -83,13 +83,13 @@ spec:
   template:
     metadata:
       annotations:
-        sidecar.istio.io/inject: "true"
+        sidecar.istio.io/inject: "true" # Keep Istio injection if needed for other mesh features
       labels:
         app: webui-experimental-rollout
     spec:
       containers:
         - name: webui-experimental-rollout
-          image: dotronglong/faker:stable
+          image: dotronglong/faker:stable # NOTE: Update image tag for new versions
           volumeMounts:
           - name: mocks-volume
             mountPath: /app/mocks
@@ -105,3 +105,6 @@ spec:
       - name: mocks-volume
         configMap:
           name: user-mocks-configmap-experiment
+  # No strategy defined means it defaults to a RollingUpdate-like behavior
+  # controlled by Argo Rollouts. The 'strategy:' key can be omitted entirely.
+  # strategy: {} # You can leave this empty or remove the 'strategy' key
