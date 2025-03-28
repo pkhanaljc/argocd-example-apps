@@ -36,7 +36,7 @@ spec:
   - name: primary
     route:
     - destination:
-        host:  webui-experimental-rollout
+        host:  webui-rollout
         port:
           number: 3030
       weight: 0
