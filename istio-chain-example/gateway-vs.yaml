@@ -14,7 +14,7 @@ spec:
     route:
     - destination:
         # Target the intermediate proxy service FQDN
-        host: hello-svc.istio-chain-example.svc.cluster.local
+        host: hello-proxy-svc.istio-chain-example.svc.cluster.local
         port:
           number: 80 # Port defined on hello-proxy-svc
       weight: 100
