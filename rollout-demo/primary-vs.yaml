@@ -14,8 +14,8 @@ spec:
     - destination:
         host: intermediate-service.rollout-demo.svc.cluster.local
         subset: stable
-        weight: 100
+      weight: 100
     - destination:
         host: intermediate-service.rollout-demo.svc.cluster.local
         subset: canary
-        weight: 0
+      weight: 0
