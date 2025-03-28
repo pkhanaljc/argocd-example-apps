@@ -83,13 +83,14 @@ spec:
   template:
     metadata:
       annotations:
-        sidecar.istio.io/inject: "true" # Keep Istio injection if needed for other mesh features
+        sidecar.istio.io/inject: "true" # Keep Istio injection if needed
       labels:
         app: webui-experimental-rollout
     spec:
       containers:
         - name: webui-experimental-rollout
-          image: dotronglong/faker:stable # NOTE: Update image tag for new versions
+          # IMPORTANT: Update the image tag/version when you want to trigger an update
+          image: dotronglong/faker:stable
           volumeMounts:
           - name: mocks-volume
             mountPath: /app/mocks
@@ -105,6 +106,17 @@ spec:
       - name: mocks-volume
         configMap:
           name: user-mocks-configmap-experiment
-  # No strategy defined means it defaults to a RollingUpdate-like behavior
-  # controlled by Argo Rollouts. The 'strategy:' key can be omitted entirely.
-  # strategy: {} # You can leave this empty or remove the 'strategy' key
+
+  # Define a minimal canary strategy to satisfy Argo Rollouts requirement
+  # This mimics a standard RollingUpdate behaviour
+  strategy:
+    canary:
+      # Use maxSurge/maxUnavailable to control the rollout speed/safety
+      # These behave like the fields in a standard Kubernetes Deployment strategy
+      maxSurge: 30%       # How many extra pods can be created during an update
+      maxUnavailable: 0   # How many pods can be unavailable during an update
+
+      # --- DO NOT INCLUDE the following for a basic rolling update ---
+      # steps: ...
+      # trafficRouting: ...
+      # analysis: ...
