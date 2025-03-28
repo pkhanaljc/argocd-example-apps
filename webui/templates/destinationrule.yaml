@@ -11,6 +11,3 @@ spec:
   - name: stable   # referenced in canary.trafficRouting.istio.destinationRule.stableSubsetName
     labels:        # labels will be injected with canary rollouts-pod-template-hash value
       app: webui-rollout
-  - name: experiment   # referenced in canary.trafficRouting.istio.destinationRule.stableSubsetName
-    labels:        # labels will be injected with canary rollouts-pod-template-hash value
-      app: webui-rollout
