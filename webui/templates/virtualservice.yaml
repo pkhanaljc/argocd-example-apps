@@ -39,9 +39,11 @@ spec:
         host:  webui-experimental-rollout
         port:
           number: 3030
-      weight: 0
+        subset: stable
+      weight: 100
     - destination:
         host: webui-experimental-rollout
         port:
           number: 3030
-      weight: 100
+        subset: canary
+      weight: 0
