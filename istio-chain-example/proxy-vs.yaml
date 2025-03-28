@@ -1,21 +1,21 @@
-# 6-proxy-vs.yaml
+# MODIFIED 6-proxy-vs-delegate.yaml
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: hello-proxy-vs
+  name: hello-proxy-vs # Keep the same name to replace the old one
   namespace: istio-chain-example
 spec:
-  exportTo:  # <-- ADD THIS LINE
-  - "*"
-  hosts:
-  # IMPORTANT: This matches traffic *within the mesh* targeting the proxy service FQDN
-  - hello-proxy-svc.istio-chain-example.svc.cluster.local
+  # --- Remove these fields for delegation ---
+  # exportTo:
+  # - '*'
+  # hosts:
+  # - hello-proxy-svc.istio-chain-example.svc.cluster.local
+  # --- Keep only the http routes ---
   http:
-  - name: "redirect-to-actual-backend"
+  - name: "redirect-to-actual-backend" # This name might be less relevant now
     route:
     - destination:
-        # Route traffic to the actual backend service FQDN
         host: hello-svc.istio-chain-example.svc.cluster.local
         port:
-          number: 80 # Port defined on hello-svc
+          number: 80
       weight: 100

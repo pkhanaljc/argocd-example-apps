@@ -1,20 +1,23 @@
-# 5-gateway-vs.yaml
+# MODIFIED 5-gateway-vs-delegate.yaml
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: hello-gateway-vs
+  name: hello-gateway-vs # Keep the same name to replace the old one
   namespace: istio-chain-example
 spec:
   hosts:
-  - "*" # Matches any host specified in the Gateway
+  - "*"
   gateways:
-  - hello-gateway # Attaches to the Gateway created above
+  - hello-gateway
   http:
-  - name: "route-to-proxy-svc"
-    route:
-    - destination:
-        # Target the intermediate proxy service FQDN
-        host: hello-proxy-svc.istio-chain-example.svc.cluster.local
-        port:
-          number: 80 # Port defined on hello-proxy-svc
-      weight: 100
+  - name: "delegate-to-proxy-logic" # Renamed route block
+    # Remove the original 'route:' section entirely
+    # route:
+    # - destination:
+    #     host: hello-proxy-svc.istio-chain-example.svc.cluster.local
+    #     port:
+    #       number: 80
+    #   weight: 100
+    delegate: # <-- Use delegate instead
+      name: hello-proxy-vs # Name of the child VirtualService
+      namespace: istio-chain-example #
