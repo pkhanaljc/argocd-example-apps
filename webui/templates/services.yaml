@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webui-rollout-proxy
+  name: webui-rollout-jpt
 spec:
   ports:
     - port: 3030
