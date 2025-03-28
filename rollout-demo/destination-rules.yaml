@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: intermediate-dr
+  namespace: rollout-demo
+spec:
+  host: intermediate-service
+  subsets:
+  - name: stable
+    labels:
+      version: stable
+  - name: canary
+    labels:
+      version: canary
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: backend-v1-dr
+  namespace: rollout-demo
+spec:
+  host: backend-service-v1
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: backend-v2-dr
+  namespace: rollout-demo
+spec:
+  host: backend-service-v2
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

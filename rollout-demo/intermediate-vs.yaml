@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: intermediate-vs
+  namespace: rollout-demo
+spec:
+  hosts:
+  - "intermediate-service"
+  http:
+  - match:
+    - headers:
+        x-argo-stage:
+          exact: "canary"
+    route:
+    - destination:
+        host: backend-service-v2.rollout-demo.svc.cluster.local
+  - route:  # Default route for stable
+    - destination:
+        host: backend-service-v1.rollout-demo.svc.cluster.local

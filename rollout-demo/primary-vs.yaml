@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: primary-vs
+  namespace: rollout-demo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - app-gateway
+  http:
+  - name: primary-route  # Must match Argo Rollout configuration
+    route:
+    - destination:
+        host: intermediate-service.rollout-demo.svc.cluster.local
+        subset: stable

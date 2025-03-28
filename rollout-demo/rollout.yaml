@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app-rollout
+  namespace: rollout-demo
+spec:
+  replicas: 3
+  strategy:
+    canary:
+      trafficRouting:
+        istio:
+          virtualService:
+            name: primary-vs
+            routes:
+            - primary-route
+          destinationRule:
+            name: intermediate-dr
+            canarySubsetName: canary
+            stableSubsetName: stable
+      steps:
+      - setWeight: 20
+      - pause: {duration: 1h}
+      - setWeight: 50
+      - pause: {duration: 1h}
+      - setWeight: 100
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+        version: stable  # Initial version
+    spec:
+      containers:
+      - name: my-app
+        image: my-app:v1.0.0
+        ports:
+        - containerPort: 8080
