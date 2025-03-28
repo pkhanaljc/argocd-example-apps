@@ -42,18 +42,3 @@ spec:
       name: http
   selector:
     app: webui-experimental-rollout
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: webui-rollout-1
-spec:
-  ports:
-    - port: 3030
-      targetPort: http
-      protocol: TCP
-      name: http
-  selector:
-    app: webui-rollout
