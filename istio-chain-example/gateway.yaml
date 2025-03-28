@@ -1,0 +1,16 @@
+# 4-gateway.yaml
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: hello-gateway
+  namespace: istio-chain-example
+spec:
+  selector:
+    istio: ingressgateway # Uses the default Istio ingress gateway deployment
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*" # Accepts traffic for any host on port 80

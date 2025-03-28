@@ -1,0 +1,20 @@
+# 5-gateway-vs.yaml
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: hello-gateway-vs
+  namespace: istio-chain-example
+spec:
+  hosts:
+  - "*" # Matches any host specified in the Gateway
+  gateways:
+  - hello-gateway # Attaches to the Gateway created above
+  http:
+  - name: "route-to-proxy-svc"
+    route:
+    - destination:
+        # Target the intermediate proxy service FQDN
+        host: hello-proxy-svc.istio-chain-example.svc.cluster.local
+        port:
+          number: 80 # Port defined on hello-proxy-svc
+      weight: 100

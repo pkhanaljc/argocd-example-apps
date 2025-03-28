@@ -1,0 +1,45 @@
+# 2-backend-app.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-v1
+  namespace: istio-chain-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: hello-app
+        version: v1
+    spec:
+      containers:
+      - name: hello
+        image: docker.io/paulbouwer/hello-kubernetes:1.7 # Simple app that shows hostname/IP
+        ports:
+        - containerPort: 8080
+          name: http-hello # Port name used by the service
+        env:
+        - name: MESSAGE
+          value: "Hello from Chained Service v1" # Custom message
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "32Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-svc # The ACTUAL backend service
+  namespace: istio-chain-example
+spec:
+  selector:
+    app: hello-app
+    version: v1 # Selects the v1 pods
+  ports:
+  - name: http # Port name must match VS target port name or follow Istio convention
+    port: 80    # Service listens on port 80
+    targetPort: http-hello # Route traffic to container port named http-hello (8080)

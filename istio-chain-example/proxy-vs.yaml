@@ -1,0 +1,19 @@
+# 6-proxy-vs.yaml
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: hello-proxy-vs
+  namespace: istio-chain-example
+spec:
+  hosts:
+  # IMPORTANT: This matches traffic *within the mesh* targeting the proxy service FQDN
+  - hello-proxy-svc.istio-chain-example.svc.cluster.local
+  http:
+  - name: "redirect-to-actual-backend"
+    route:
+    - destination:
+        # Route traffic to the actual backend service FQDN
+        host: hello-svc.istio-chain-example.svc.cluster.local
+        port:
+          number: 80 # Port defined on hello-svc
+      weight: 100

@@ -1,0 +1,12 @@
+# 3-proxy-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-proxy-svc # The intermediate target service name
+  namespace: istio-chain-example
+spec:
+  # No selector - this service doesn't directly route to pods
+  ports:
+  - name: http
+    port: 80 # Port targeted by the first VS
+    targetPort: 80 # Can be anything, not used for pod routing

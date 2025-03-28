@@ -1,0 +1,7 @@
+# 1-namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-chain-example
+  labels:
+    istio-injection: enabled # Automatically inject Istio sidecars
