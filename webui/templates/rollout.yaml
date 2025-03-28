@@ -129,7 +129,7 @@ spec:
             routes:
               - primary
           destinationRule:
-            name: webui-destrule-experimental    # required
+            name: webui-destrule-experiment    # required
             canarySubsetName: canary  # required
             stableSubsetName: stable  # required
       steps:
