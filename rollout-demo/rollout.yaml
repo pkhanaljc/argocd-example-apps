@@ -4,7 +4,7 @@ metadata:
   name: my-app-rollout
   namespace: rollout-demo
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     canary:
       trafficRouting:
@@ -12,16 +12,16 @@ spec:
           virtualService:
             name: primary-vs
             routes:
-            - primary-route
+            - primary-route  # Must match VirtualService
           destinationRule:
-            name: intermediate-dr
-            canarySubsetName: canary
-            stableSubsetName: stable
+            name: intermediate-dr  # Must match DestinationRule
+            canarySubsetName: canary  # Must match subset
+            stableSubsetName: stable  # Must match subset
       steps:
       - setWeight: 20
-      - pause: {duration: 1h}
+      - pause: {}
       - setWeight: 50
-      - pause: {duration: 1h}
+      - pause: {duration: 10m}
       - setWeight: 100
   selector:
     matchLabels:
@@ -34,6 +34,10 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: my-app:v1.0.0
+        image: nginx:1.23  # Test image
         ports:
-        - containerPort: 8080
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
