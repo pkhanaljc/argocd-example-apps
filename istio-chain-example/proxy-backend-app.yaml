@@ -1,0 +1,29 @@
+# 7-proxy-backend-app.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-proxy-app # Deployment for the proxy service
+  namespace: istio-chain-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-proxy-app # Label for these specific pods
+  template:
+    metadata:
+      labels:
+        app: hello-proxy-app # Label for these specific pods
+    spec:
+      containers:
+      - name: hello-proxy # Container name
+        image: docker.io/paulbouwer/hello-kubernetes:1.7 # Using same base image
+        ports:
+        - containerPort: 8080
+          name: http-proxy-hello # Different port name for clarity
+        env:
+        - name: MESSAGE
+          value: "Response directly from PROXY Service" # Distinct message
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "32Mi"

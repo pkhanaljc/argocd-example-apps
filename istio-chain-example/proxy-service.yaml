@@ -9,4 +9,4 @@ spec:
   ports:
   - name: http
     port: 80 # Port targeted by the first VS
-    targetPort: 80 # Can be anything, not used for pod routing
+    targetPort: http-proxy-hello
