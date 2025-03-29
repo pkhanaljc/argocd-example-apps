@@ -8,9 +8,6 @@ spec:
   - "intermediate-service"
   http:
   - match:
-    - headers:
-        x-argo-stage:
-          exact: "canary"
     route:
     - destination:
         host: backend-service-v2.rollout-demo.svc.cluster.local
