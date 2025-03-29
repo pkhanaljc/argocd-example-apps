@@ -5,7 +5,7 @@ metadata:
   namespace: rollout-demo
 spec:
   hosts:
-  - "intermediate-service"
+  - "intermediate-service.rollout-demo.svc.cluster.local"
   http:
   - match:
     route:
