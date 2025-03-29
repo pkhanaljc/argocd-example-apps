@@ -5,14 +5,10 @@ metadata:
   namespace: rollout-demo
 spec:
   hosts:
-  - "intermediate-service.rollout-demo.svc.cluster.local"
+  - "intermediate-service.rollout-demo.svc.cluster.local" # Must match Destination
   http:
-  - match:
-    route:
-    - destination:
-        host: backend-service-v2.rollout-demo.svc.cluster.local
-      weight: 100
-  - route:  # Default route for stable
+  - route:
     - destination:
         host: backend-service-v1.rollout-demo.svc.cluster.local
-      weight: 0
+        port:
+          number: 80
