@@ -4,7 +4,7 @@ metadata:
   name: my-app-rollout
   namespace: rollout-demo
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     canary:
       trafficRouting:

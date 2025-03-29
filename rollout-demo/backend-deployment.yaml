@@ -4,7 +4,7 @@ metadata:
   name: backend-v1
   namespace: rollout-demo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: backend-v1
@@ -25,7 +25,7 @@ metadata:
   name: backend-v2
   namespace: rollout-demo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: backend-v2
