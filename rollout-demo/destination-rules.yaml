@@ -34,3 +34,23 @@ spec:
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
+---
+
+
+Copy
+# destination-rule.yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: backend-dr
+  namespace: rollout-demo
+spec:
+  host: "*.svc.cluster.local" # Applies to all services
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+    portLevelSettings:
+    - port:
+        number: 80
+      tls:
+        mode: ISTIO_MUTUAL

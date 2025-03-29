@@ -6,6 +6,7 @@ metadata:
 spec:
   hosts:
   - "intermediate-service.rollout-demo.svc.cluster.local" # Must match Destination
+  - "intermediate-service"
   http:
   - route:
     - destination:
