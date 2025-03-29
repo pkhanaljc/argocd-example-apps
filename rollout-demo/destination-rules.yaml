@@ -36,8 +36,6 @@ spec:
       mode: ISTIO_MUTUAL
 ---
 
-
-Copy
 # destination-rule.yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
