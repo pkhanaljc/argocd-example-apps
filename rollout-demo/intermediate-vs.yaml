@@ -18,4 +18,4 @@ spec:
   - route:  # Default route for stable
     - destination:
         host: backend-service-v1.rollout-demo.svc.cluster.local
-    weight: 0
+      weight: 0
