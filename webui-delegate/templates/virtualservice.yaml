@@ -34,7 +34,7 @@ spec:
     # The name of your Istio Ingress Gateway resource
     - webui-rollout-gateway
   hosts:
-    - "localhost"
+    - "*"
   http:
   # Rule 1: Match the specific header value 'false' and DELEGATE
   - match:
