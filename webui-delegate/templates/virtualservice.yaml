@@ -35,22 +35,11 @@ spec:
   # Rule 1: Match the specific header value 'false' and DELEGATE
   - match:
       - headers:
-          # Check if the header 'x-node-experiment' exists and is exactly 'false'
           x-node-experiment:
             exact: "false"
-      # Optional: You might add other criteria like URI prefix if needed
-      # - uri:
-      #     prefix: /
-    # If the header matches, delegate routing control to 'webui-rollout' VS
-    delegate:
-      name: webui-rollout # Name of the VirtualService to delegate to
-      namespace: webui-delegate # Namespace where 'webui-rollout' VS exists
-  - # No specific match condition needed here, acts as fallback
-      # Optional: Add match criteria like URI prefix if needed
-      # match:
-      # - uri:
-      #     prefix: /
-      route:
-        - destination:
-            # Route directly to the experimental Kubernetes Service FQDN
-            host: webui-experimental-rollout
+    route:
+      - destination:
+          host: webui-experimental-rollout
+  - delegate:
+      name: webui-rollout
+      namespace: webui-delegate
