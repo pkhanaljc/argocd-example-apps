@@ -3,10 +3,6 @@ kind: VirtualService
 metadata:
   name: webui-rollout
 spec:
-  gateways:
-  - webui-rollout-gateway
-  hosts:
-  - "webui-rollout"
   http:
   - name: primary
     route:
