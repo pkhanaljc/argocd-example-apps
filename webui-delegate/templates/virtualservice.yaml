@@ -48,7 +48,7 @@ spec:
     # If the header matches, delegate routing control to 'webui-rollout' VS
     delegate:
       name: webui-rollout # Name of the VirtualService to delegate to
-      namespace: webui-rollout-delegate # Namespace where 'webui-rollout' VS exists
+      namespace: webui-delegate # Namespace where 'webui-rollout' VS exists
   - # No specific match condition needed here, acts as fallback
       # Optional: Add match criteria like URI prefix if needed
       # match:
