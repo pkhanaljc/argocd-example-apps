@@ -36,7 +36,7 @@ spec:
   - match:
       - headers:
           x-node-experiment:
-            exact: "false"
+            exact: "true"
     route:
       - destination:
           host: webui-experimental-rollout
