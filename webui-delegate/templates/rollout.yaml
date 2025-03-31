@@ -125,7 +125,7 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            name: webui-rollout-proxy
+            name: webui-rollout
             routes:
               - primary
           destinationRule:
