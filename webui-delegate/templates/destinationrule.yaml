@@ -1,0 +1,29 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webui-destrule
+spec:
+  host: webui-rollout
+  subsets:
+  - name: canary   # referenced in canary.trafficRouting.istio.destinationRule.canarySubsetName
+    labels:        # labels will be injected with canary rollouts-pod-template-hash value
+      app: webui-rollout
+  - name: stable   # referenced in canary.trafficRouting.istio.destinationRule.stableSubsetName
+    labels:        # labels will be injected with canary rollouts-pod-template-hash value
+      app: webui-rollout
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webui-destrule-experiment
+spec:
+  host: webui-rollout-proxy
+  subsets:
+    - name: canary   # referenced in canary.trafficRouting.istio.destinationRule.canarySubsetName
+      labels:        # labels will be injected with canary rollouts-pod-template-hash value
+        app: webui-rollout-experimental
+    - name: stable   # referenced in canary.trafficRouting.istio.destinationRule.stableSubsetName
+      labels:        # labels will be injected with canary rollouts-pod-template-hash value
+        app: webui-rollout-experimental
