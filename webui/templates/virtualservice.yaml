@@ -14,14 +14,12 @@ spec:
         host: webui-rollout-proxy
         port:
           number: 3030
-        subset: stable  # referenced in canary.trafficRouting.webui.destinationRule.stableSubsetName
-      weight: 100
+      weight: 90
     - destination:
-        host: webui-rollout-proxy
+        host: webui-experimental-rollout
         port:
           number: 3030
-        subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
-      weight: 0
+      weight: 10
 
 ---
 
@@ -36,13 +34,13 @@ spec:
   - name: primary
     route:
     - destination:
-        host:  webui-experimental-rollout
+        host:  webui-rollout
         port:
           number: 3030
         subset: stable
       weight: 100
     - destination:
-        host: webui-experimental-rollout
+        host: webui-rollout
         port:
           number: 3030
         subset: canary

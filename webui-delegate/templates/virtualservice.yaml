@@ -43,3 +43,13 @@ spec:
   - delegate:
       name: webui-rollout
       namespace: webui-delegate
+  - match:
+      - headers:
+          x-node-experiment:
+            exact: "true"
+    route:
+      - destination:
+          host: webui-experimental-rollout
+  - delegate:
+      name: webui-rollout
+      namespace: webui-delegate
