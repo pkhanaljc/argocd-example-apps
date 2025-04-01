@@ -15,7 +15,7 @@ spec:
         app: webui-rollout
     spec:
       containers:
-      - name: webui-rollout
+      - name: webui-proxy-rollout
         image: dotronglong/faker:stable
         volumeMounts:
         - name: mocks-volume
