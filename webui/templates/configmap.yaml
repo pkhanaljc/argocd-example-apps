@@ -7,7 +7,7 @@ data:
     {
       "request": {
         "method": "GET",
-        "path": "/v2/users"
+        "path": "/v1/users"
       },
       "response": {
         "body": [
@@ -28,7 +28,7 @@ data:
     {
       "request": {
         "method": "GET",
-        "path": "/v2/users"
+        "path": "/v1/users"
       },
       "response": {
         "body": [
