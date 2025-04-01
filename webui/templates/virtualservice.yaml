@@ -10,11 +10,11 @@ spec:
   http:
   - name: primary
     route:
-#    - destination:
-#        host: webui-rollout-proxy
-#        port:
-#          number: 3030
-#      weight: 0
+    - destination:
+        host: webui-rollout-proxy
+        port:
+          number: 3030
+      weight: 0
     - destination:
         host: webui-experimental-rollout
         port:
