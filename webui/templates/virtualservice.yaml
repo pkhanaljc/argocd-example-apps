@@ -14,12 +14,12 @@ spec:
         host: webui-rollout-proxy
         port:
           number: 3030
-      weight: 0
+      weight: 100
     - destination:
         host: webui-experimental-rollout
         port:
           number: 3030
-      weight: 100
+      weight: 0
 
 ---
 
