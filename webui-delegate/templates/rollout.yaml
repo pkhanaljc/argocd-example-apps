@@ -52,11 +52,11 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            name: webui-rollout
+            name: webui-rollout-delegate
             routes:
-            - primary
+            - experimental
           destinationRule:
-            name: webui-destrule    # required
+            name: webui-experiment-destrule    # required
             canarySubsetName: canary  # required
             stableSubsetName: stable  # required
       steps:
@@ -125,7 +125,7 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            name: webui-rollout
+            name: webui-rollout-delegate
             routes:
               - primary
           destinationRule:

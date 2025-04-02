@@ -27,19 +27,38 @@ metadata:
   name: webui-rollout-delegate
 spec:
   gateways:
-    # The name of your Istio Ingress Gateway resource
     - webui-rollout-gateway
   hosts:
     - "*"
   http:
-  # Rule 1: Match the specific header value 'false' and DELEGATE
   - match:
       - headers:
           x-node-experiment:
             exact: "true"
+    name: experimental
     route:
-      - destination:
-          host: webui-experimental-rollout
-  - delegate:
-      name: webui-rollout
-      namespace: webui-delegate
+    - destination:
+        host: webui-experimental-rollout
+        port:
+          number: 3030
+        subset: stable  # referenced in canary.trafficRouting.webui.destinationRule.stableSubsetName
+      weight: 100
+    - destination:
+        host: webui-experimental-rollout
+        port:
+          number: 3030
+        subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
+      weight: 0
+  - route:
+    - destination:
+        host: webui-rollout
+        port:
+          number: 3030
+        subset: stable  # referenced in canary.trafficRouting.webui.destinationRule.stableSubsetName
+      weight: 100
+    - destination:
+        host: webui-rollout
+        port:
+          number: 3030
+        subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
+      weight: 0
