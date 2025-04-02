@@ -86,7 +86,8 @@ spec:
       annotations:
         sidecar.istio.io/inject: "true"
       labels:
-        app: webui-experimental-rollout
+        app: webui-rollout
+        experiment: "true"
     spec:
       containers:
         - name: webui-experimental-rollout
