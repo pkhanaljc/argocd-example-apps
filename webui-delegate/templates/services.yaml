@@ -25,4 +25,3 @@ spec:
       name: http
   selector:
     app: webui-rollout
-    experiment: "true"
