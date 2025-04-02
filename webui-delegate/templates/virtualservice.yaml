@@ -31,11 +31,7 @@ spec:
   hosts:
     - "*"
   http:
-  - match:
-      - headers:
-          x-node-experiment:
-            exact: "true"
-    name: experimental
+  - name: experimental
     route:
     - destination:
         host: webui-experimental-rollout
