@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webui-rollout
-        image: dotronglong/faker:3.0.0
+        image: dotronglong/faker:latest
         volumeMounts:
         - name: mocks-volume
           mountPath: /app/mocks
