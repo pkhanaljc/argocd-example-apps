@@ -49,7 +49,8 @@ spec:
           number: 3030
         subset: canary  # referenced in canary.trafficRouting.webui.destinationRule.canarySubsetName
       weight: 0
-  - route:
+  - name: primary
+    route:
     - destination:
         host: webui-rollout
         port:
