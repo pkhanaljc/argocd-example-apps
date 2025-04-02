@@ -56,7 +56,7 @@ spec:
             routes:
             - experimental
           destinationRule:
-            name: webui-experiment-destrule    # required
+            name: webui-destrule-experiment    # required
             canarySubsetName: canary  # required
             stableSubsetName: stable  # required
       steps:
