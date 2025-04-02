@@ -24,4 +24,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: webui-experimental-rollout
+    app: webui-rollout
+    experiment: "true"
