@@ -79,7 +79,8 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: webui-experimental-rollout
+      app: webui-rollout
+      experiment: "true"
   template:
     metadata:
       annotations:
